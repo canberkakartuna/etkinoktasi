@@ -8,6 +8,4 @@ var sequelize = new Sequelize(database, user, password, {
 	dialect: "postgres",
 });
 
-console.log("db, ", dbConfig);
-
 export default sequelize;
