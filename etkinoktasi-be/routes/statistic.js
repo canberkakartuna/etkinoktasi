@@ -1,10 +1,9 @@
 import express from "express";
 
-import { getAll, create } from "../controllers/statisticController.js";
+import { getAll, create } from "../controllers/statistic.js";
 
 var statisticRouter = express.Router();
 
-/* GET home page. */
 statisticRouter.get("/", getAll);
 
 statisticRouter.post("/", create);

@@ -1,4 +1,4 @@
-import Statistic from "../models/statisticModel.js";
+import Statistic from "../models/statistic.js";
 
 export const getAll = async (req, res) => {
 	console.log("sadasd");

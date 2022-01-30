@@ -6,6 +6,8 @@ import logger from "morgan";
 import { fileURLToPath } from "url";
 
 import statisticRouter from "./routes/statistic.js";
+import targetRouter from "./routes/target.js";
+import coordinateRouter from "./routes/coordinate.js";
 
 let app = express();
 const port = 3000;
@@ -24,6 +26,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", statisticRouter);
+app.use("/target", targetRouter);
+app.use("/coordinate", coordinateRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
