@@ -1,4 +1,5 @@
 import Coordinate from "../models/coordinate.js";
+import Statistic from "../models/statistic.js";
 import Target from "../models/target.js";
 
 const TargetController = {
@@ -57,6 +58,27 @@ const TargetController = {
 				coordinateId,
 			});
 			res.status(201).json(target);
+
+			const statistic = await Statistic.findAll({
+				where: {
+					label: name,
+				},
+			});
+
+			const statisticValue = statistic?.[0]?.dataValues?.value;
+			if (statisticValue) {
+				// Update
+				await statistic?.[0]?.update({
+					label: name,
+					value: statisticValue + 1,
+				});
+			} else {
+				// Create
+				await Statistic.create({
+					label: name,
+					value: 1,
+				});
+			}
 		} catch (error) {
 			res.status(500).json({
 				message: "An error occurred while creating target",

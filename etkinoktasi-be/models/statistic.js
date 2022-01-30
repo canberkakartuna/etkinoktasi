@@ -18,7 +18,7 @@ Statistic.init(
 	{
 		sequelize,
 		modelName: "Statistic",
-		tableName: "statistics",
+		tableName: "statistic",
 		freezeTableName: true,
 		timestamps: true,
 	}

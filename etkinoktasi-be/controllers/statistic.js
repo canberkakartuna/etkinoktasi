@@ -3,10 +3,7 @@ import Statistic from "../models/statistic.js";
 export const getAll = async (req, res) => {
 	console.log("sadasd");
 	try {
-		//TODO: createAt & updatedAt should be added
-		const statistic = await Statistic.findAll({
-			attributes: ["label", "value"],
-		});
+		const statistic = await Statistic.findAll();
 		res.status(200).json(statistic);
 	} catch (error) {
 		res.status(500).json({
@@ -69,6 +66,25 @@ export const update = async (req, res) => {
 	} catch (error) {
 		res.status(500).json({
 			message: "An error occurred while updating statistic",
+			error: error.message,
+		});
+	}
+};
+
+export const remove = async (req, res) => {
+	const { id } = req.params;
+	try {
+		const statistic = await Statistic.findByPk(id);
+		if (!statistic) {
+			return res.status(404).json({
+				message: "Statistic not found",
+			});
+		}
+		await statistic.destroy();
+		res.status(200).json(statistic);
+	} catch (error) {
+		res.status(500).json({
+			message: "An error occurred while deleting statistic",
 			error: error.message,
 		});
 	}
